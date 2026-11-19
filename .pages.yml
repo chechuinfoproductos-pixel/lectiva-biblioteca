@@ -1,0 +1,86 @@
+
+media:
+  - name: covers
+    label: Portadas
+    input: media/covers
+    output: /media/covers
+    extensions: [png, jpg, jpeg, webp]
+    rename: safe
+
+  - name: pdfs
+    label: Libros PDF
+    input: media/pdfs
+    output: /media/pdfs
+    extensions: [pdf]
+    rename: safe
+
+content:
+  - name: books
+    label: Libros de Lectiva
+    type: collection
+    path: content/books
+    format: json
+    filename: "{primary}.json"
+    subfolders: false
+    view:
+      primary: title
+      fields: [title, author, category, published]
+    fields:
+      - name: title
+        label: Título del libro
+        type: string
+        required: true
+
+      - name: author
+        label: Autor
+        type: string
+        required: true
+
+      - name: description
+        label: Descripción
+        type: text
+        required: true
+
+      - name: category
+        label: Categoría
+        type: string
+        required: true
+
+      - name: language
+        label: Idioma
+        type: string
+
+      - name: pages
+        label: Número de páginas
+        type: number
+
+      - name: cover
+        label: Portada
+        type: image
+        required: true
+        options:
+          media: covers
+          extensions: [png, jpg, jpeg, webp]
+
+      - name: pdf
+        label: Archivo PDF
+        type: file
+        required: true
+        options:
+          media: pdfs
+          extensions: [pdf]
+
+      - name: rights_confirmed
+        label: Confirmo los derechos de distribución
+        type: boolean
+        required: true
+        description: Confirma que tienes autorización para distribuir públicamente esta obra.
+
+      - name: published
+        label: Publicar en Lectiva
+        type: boolean
+        description: Desactivado significa borrador. Actívalo solo cuando el libro esté completo y autorizado.
+
+      - name: added_at
+        label: Fecha de incorporación
+        type: date
